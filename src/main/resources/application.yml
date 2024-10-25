@@ -5,3 +5,6 @@ spring:
     mode: HTML
     encoding: UTF-8
     cache: false
+
+server:
+  port: ${PORT:8080}
