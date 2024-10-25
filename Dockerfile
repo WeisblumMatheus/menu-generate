@@ -1,12 +1,17 @@
-FROM maven:3.8.1-openjdk-21 as build
+FROM maven:3.9.8-eclipse-temurin-21 AS build
+
+COPY src /app/src
+
+COPY pom.xml /app
 
 WORKDIR /app
-COPY . .
+RUN mvn clean install -U
 
-RUN mvn clean package -DskipTests
+FROM openjdk:21
+COPY --from=build /app/target/mal-randomizer-0.0.1-SNAPSHOT.jar /app/app.jar
 
-FROM openjdk:21-slim
-COPY --from=build /app/target/*.jar app.jar
+WORKDIR /app
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+CMD ["java", "-jar", "app.jar"]
