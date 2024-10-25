@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cardápio - Quentinhas Praia da Urca</title>
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2;
+        }
+        .container {
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            page-break-inside: avoid;
+        }
+        h1 {
+            color: #e74c3c;
+            font-size: 70px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        .menu-section {
+            margin: 20px 0;
+            text-align: left;
+        }
+        .item-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .food-item-container {
+            flex: 1;
+            border-bottom: 1px dashed #e74c3c;
+        }
+        .item-row:last-child {
+            border-bottom: none;
+        }
+        .food-item {
+            font-size: 20px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        .drink-item {
+            font-size: 30px;
+            font-weight: 600;
+            color: #34495e;
+        }
+        .price, .price-drink {
+            flex-basis: 100px;
+            font-size: 25px;
+            color: #e74c3c;
+            font-weight: 700;
+            text-align: right;
+            white-space: nowrap;
+        }
+        h2 {
+            color: #e74c3c;
+            font-size: 55px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .item-row:hover {
+            background-color: #f0f3f5;
+            transition: background-color 0.3s ease;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .food-item {
+                font-size: 20px;
+            }
+            .drink-item{
+                font-size: 30px;
+            }
+            .price, .price-drink {
+                font-size: 25px;
+            }
+            h1 {
+                font-size: 70px;
+            }
+            h3 {
+                font-size: 20px;
+            }
+            h2 {
+                font-size: 55px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>CARDÁPIO</h1>
+    <h3>TODOS OS PRATOS ACOMPANHAM ARROZ/FEIJÃO/FAROFA</h3>
+    <div class="menu-section">
+        <div th:each="foodItem, iterStat : ${foodItems}">
+            <div class="item-row">
+                <div class="food-item-container">
+                    <span class="food-item" th:text="${iterStat.index + 1} + ') ' + ${foodItem.foodName}">1) Nome da Comida</span>
+                </div>
+                <span class="price" th:text="'R$ ' + ${foodItem.price}">Preço</span>
+            </div>
+        </div>
+    </div>
+    <h2>Bebidas</h2>
+    <div class="menu-section">
+        <div class="item-row">
+            <span class="drink-item">- GUARANÁ NATURAL</span>
+            <span class="price-drink">R$ 2,00</span>
+        </div>
+        <div class="item-row">
+            <span class="drink-item">- CONVENÇÃO GUARANÁ</span>
+            <span class="price-drink">R$ 3,00</span>
+        </div>
+        <div class="item-row">
+            <span class="drink-item">- ÁGUA SEM GÁS</span>
+            <span class="price-drink">R$ 2,00</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Cardápio</title>
+  <style>
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #f4f7f6;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h1 {
+      color: #e74c3c;
+      margin-bottom: 20px;
+      font-size: 28px; /* Tamanho do título */
+    }
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      font-size: 16px; /* Tamanho da fonte do rótulo */
+    }
+    input[type="text"], input[type="number"] {
+      width: calc(100% - 20px); /* Ajusta a largura para incluir padding */
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      transition: border-color 0.3s;
+      font-size: 16px; /* Tamanho da fonte */
+    }
+    input[type="text"]:focus, input[type="number"]:focus {
+      border-color: #e74c3c;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background-color: #e74c3c;
+      color: white;
+      font-size: 18px; /* Tamanho da fonte do botão */
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #d63a30;
+    }
+    .dish-group {
+      margin-bottom: 15px;
+      display: none;
+      padding: 15px; /* Adiciona padding interno */
+      border: 1px solid #e74c3c; /* Borda colorida */
+      border-radius: 5px;
+      background-color: #f9f9f9; /* Fundo claro para as seções dos pratos */
+    }
+    .dish-group:first-of-type {
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .container {
+        padding: 15px;
+      }
+      h1 {
+        font-size: 24px; /* Reduz o tamanho do título em telas menores */
+      }
+      label, input[type="text"], input[type="number"], button {
+        font-size: 14px; /* Reduz o tamanho da fonte para dispositivos menores */
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Gerador de Cardápio</h1>
+  <form id="menuForm">
+    <div id="dishes-container">
+      <div class="dish-group" id="dishGroup1">
+        <label for="foodName1">Nome do Prato 1:</label>
+        <input type="text" id="foodName1" name="foodName1" placeholder="Ex: Feijoada Vermelha">
+        <label for="price1">Preço:</label>
+        <input type="number" id="price1" name="price1" placeholder="Ex: 10,00" step="0.01">
+      </div>
+      <div class="dish-group" id="dishGroup2">
+        <label for="foodName2">Nome do Prato 2:</label>
+        <input type="text" id="foodName2" name="foodName2" placeholder="Ex: Strogonoff de Frango">
+        <label for="price2">Preço:</label>
+        <input type="number" id="price2" name="price2" placeholder="Ex: 10,00" step="0.01">
+      </div>
+      <div class="dish-group" id="dishGroup3">
+        <label for="foodName3">Nome do Prato 3:</label>
+        <input type="text" id="foodName3" name="foodName3" placeholder="Ex: Lasanha">
+        <label for="price3">Preço:</label>
+        <input type="number" id="price3" name="price3" placeholder="Ex: 10,00" step="0.01">
+      </div>
+      <div class="dish-group" id="dishGroup4">
+        <label for="foodName4">Nome do Prato 4:</label>
+        <input type="text" id="foodName4" name="foodName4" placeholder="Ex: Risoto de Camarão">
+        <label for="price4">Preço:</label>
+        <input type="number" id="price4" name="price4" placeholder="Ex: 10,00" step="0.01">
+      </div>
+      <div class="dish-group" id="dishGroup5">
+        <label for="foodName5">Nome do Prato 5:</label>
+        <input type="text" id="foodName5" name="foodName5" placeholder="Ex: Salada Caesar">
+        <label for="price5">Preço:</label>
+        <input type="number" id="price5" name="price5" placeholder="Ex: 10,00" step="0.01">
+      </div>
+      <div class="dish-group" id="dishGroup6">
+        <label for="foodName6">Nome do Prato 6:</label>
+        <input type="text" id="foodName6" name="foodName6" placeholder="Ex: Bacalhau ao Forno">
+        <label for="price6">Preço:</label>
+        <input type="number" id="price6" name="price6" placeholder="Ex: 10,00" step="0.01">
+      </div>
+      <div class="dish-group" id="dishGroup7">
+        <label for="foodName7">Nome do Prato 7:</label>
+        <input type="text" id="foodName7" name="foodName7" placeholder="Ex: Bife à Parmegiana">
+        <label for="price7">Preço:</label>
+        <input type="number" id="price7" name="price7" placeholder="Ex: 10,00" step="0.01">
+      </div>
+    </div>
+    <button type="submit">Gerar Cardápio</button>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById("menuForm");
+
+  function showNextDishGroup(currentGroupId, nextGroupId) {
+    const currentFoodInput = document.getElementById(`foodName${currentGroupId}`);
+    const currentPriceInput = document.getElementById(`price${currentGroupId}`);
+
+    currentFoodInput.addEventListener("input", () => {
+      if (currentFoodInput.value.trim() && currentPriceInput.value.trim()) {
+        document.getElementById(`dishGroup${nextGroupId}`).style.display = 'block';
+      }
+    });
+    currentPriceInput.addEventListener("input", () => {
+      if (currentFoodInput.value.trim() && currentPriceInput.value.trim()) {
+        document.getElementById(`dishGroup${nextGroupId}`).style.display = 'block';
+      }
+    });
+  }
+
+  for (let i = 1; i < 7; i++) {
+    showNextDishGroup(i, i + 1);
+  }
+
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const menuItems = [];
+    for (let i = 1; i <= 7; i++) {
+      const foodName = document.getElementById(`foodName${i}`).value.trim();
+      const price = document.getElementById(`price${i}`).value.trim();
+
+      if (foodName && price) {
+        menuItems.push({ foodName, price });
+      }
+    }
+
+    if (menuItems.length === 0) {
+      alert("Por favor, preencha pelo menos um prato para gerar o cardápio.");
+      return;
+    }
+
+    fetch("/v1/menu", {
+      method: "POST",
+      body: JSON.stringify(menuItems),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+            .then(response => response.blob())
+            .then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'cardapio.pdf';  // Nome do arquivo
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+            })
+            .catch(error => console.error('Erro:', error));
+  });
+</script>
+</body>
+</html>
