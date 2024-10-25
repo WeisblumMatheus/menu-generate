@@ -2,7 +2,6 @@ package com.quentinhas.cardapio.controller;
 
 import com.quentinhas.cardapio.model.MenuItem;
 import com.quentinhas.cardapio.service.MenuService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
