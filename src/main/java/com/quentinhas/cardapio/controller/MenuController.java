@@ -22,12 +22,12 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @GetMapping("/gerar-cardapio")
+    @GetMapping
     public ModelAndView showForms() {
         return new ModelAndView("gerar_tela");
     }
 
-    @PostMapping
+    @PostMapping("/gerar-cardapio")
     public void createMenu(@RequestBody List<MenuItem> menu, HttpServletResponse response) throws IOException {
         menuItem.clear();
         menuItem.addAll(menu);
